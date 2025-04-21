@@ -1,4 +1,4 @@
-package org.wy.example;
+package org.wy.example.server;
 
 import com.iohao.game.action.skeleton.annotation.ActionController;
 import com.iohao.game.action.skeleton.annotation.ActionMethod;

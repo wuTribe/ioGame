@@ -1,4 +1,4 @@
-package org.wy.example;
+package org.wy.example.server;
 
 import com.iohao.game.action.skeleton.core.BarSkeleton;
 import com.iohao.game.action.skeleton.core.BarSkeletonBuilderParamConfig;

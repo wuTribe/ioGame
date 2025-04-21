@@ -1,4 +1,4 @@
-package org.wy.example;
+package org.wy.example.server;
 
 public interface DemoCmd {
     /** 主路由 */

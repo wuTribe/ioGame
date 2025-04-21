@@ -1,4 +1,4 @@
-package org.wy.example;
+package org.wy.example.server;
 
 import com.baidu.bjf.remoting.protobuf.annotation.ProtobufClass;
 import lombok.Data;
