@@ -1,9 +1,11 @@
-package org.wy.example.server;
+package org.wy.example.action;
 
 import com.iohao.game.action.skeleton.annotation.ActionController;
 import com.iohao.game.action.skeleton.annotation.ActionMethod;
 import com.iohao.game.action.skeleton.core.flow.FlowContext;
 import org.wy.example.code.GameCode;
+import org.wy.example.server.Cmd;
+import org.wy.example.server.HelloReq;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -13,15 +15,15 @@ public class DemoAction {
     @ActionMethod(Cmd.here)
     public HelloReq here(HelloReq helloReq) {
         HelloReq newHelloReq = new HelloReq();
-        newHelloReq.name = helloReq.name + ", I'm here ";
+        newHelloReq.setName(helloReq.getName() + ", I'm here ");
         return newHelloReq;
     }
 
     @ActionMethod(Cmd.jackson)
     public HelloReq jackson(HelloReq helloReq) {
         // 异常机制演示
-        GameCode.nameChecked.assertTrue("jackson".equals(helloReq.name));
-        helloReq.name = helloReq.name + ", hello, jackson !";
+        GameCode.nameChecked.assertTrue("jackson".equals(helloReq.getName()));
+        helloReq.setName(helloReq.getName() + ", hello, jackson !");
         return helloReq;
     }
 
@@ -30,7 +32,7 @@ public class DemoAction {
         // 得到一个 List 列表数据，并返回给请求端
         return IntStream.range(1, 5).mapToObj(id -> {
             HelloReq helloReq = new HelloReq();
-            helloReq.name = "data:" + id;
+            helloReq.setName("data:" + id);
             return helloReq;
         }).toList();
     }
@@ -42,7 +44,7 @@ public class DemoAction {
     public void hereFlow(HelloReq helloReq, FlowContext flowContext) {
         // 业务数据
         var newHelloReq = new HelloReq();
-        newHelloReq.name = helloReq.name + ", I'm here ";
+        newHelloReq.setName(helloReq.getName() + ", I'm here ");
 
         flowContext.broadcastMe(newHelloReq);
     }

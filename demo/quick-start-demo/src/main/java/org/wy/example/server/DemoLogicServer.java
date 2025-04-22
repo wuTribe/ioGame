@@ -8,11 +8,18 @@ import com.iohao.game.bolt.broker.core.client.BrokerAddress;
 import com.iohao.game.bolt.broker.core.client.BrokerClient;
 import com.iohao.game.bolt.broker.core.client.BrokerClientBuilder;
 import com.iohao.game.common.kit.NetworkKit;
+import com.iohao.game.external.core.config.ExternalGlobalConfig;
+import org.wy.example.action.DemoAction;
 import org.wy.example.action.LoginAction;
 
 public class DemoLogicServer extends AbstractBrokerClientStartup {
     @Override
     public BarSkeleton createBarSkeleton() {
+        var accessAuthenticationHook = ExternalGlobalConfig.accessAuthenticationHook;
+        accessAuthenticationHook.setVerifyIdentity(true);
+        // 添加不需要登录（身份验证）也能访问的业务方法 (action)
+        accessAuthenticationHook.addIgnoreAuthCmd(Cmd.demoCmd);
+        accessAuthenticationHook.addIgnoreAuthCmd(Cmd.login, Cmd.loginVerify);
         return new BarSkeletonBuilderParamConfig()
                 .scanActionPackage(DemoAction.class)
                 .scanActionPackage(LoginAction.class)

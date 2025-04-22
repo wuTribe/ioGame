@@ -16,10 +16,17 @@ public class LoginRegion extends AbstractInputCommandRegion {
         // ---------------- 模拟请求 2-1 ----------------
         ofCommand(Cmd.loginVerify)
                 .setTitle("loginVerify")
-                .setRequestData(inputCommandCreate.nextParamString("aaaa"))
+                .setRequestData(inputCommandCreate.nextParamString("loginVerify-aaa"))
                 .callback(result -> {
                     // 得到 list 数据，因为服务器返回的是 List
                     log.info("loginVerify : {}", result);
+                });
+
+        ofCommand(Cmd.loginAfter)
+                .setTitle("loginAfter")
+                .callback(result -> {
+                    // 得到 list 数据，因为服务器返回的是 List
+                    log.info("loginAfter : {}", result);
                 });
     }
 

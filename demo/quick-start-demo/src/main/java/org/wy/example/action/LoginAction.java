@@ -47,4 +47,10 @@ public class LoginAction {
 
         return userInfo;
     }
+
+
+    @ActionMethod(Cmd.loginAfter)
+    public void loginAfter() {
+        log.info("登录后调用===========");
+    }
 }
