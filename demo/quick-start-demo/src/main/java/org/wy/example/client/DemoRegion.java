@@ -2,7 +2,7 @@ package org.wy.example.client;
 
 import com.iohao.game.external.client.AbstractInputCommandRegion;
 import lombok.extern.slf4j.Slf4j;
-import org.wy.example.server.DemoCmd;
+import org.wy.example.server.Cmd;
 import org.wy.example.server.HelloReq;
 
 import java.util.List;
@@ -12,10 +12,10 @@ public class DemoRegion extends AbstractInputCommandRegion {
     @Override
     public void initInputCommand() {
         // 模拟请求的主路由
-        inputCommandCreate.cmd = DemoCmd.cmd;
+        inputCommandCreate.cmd = Cmd.demoCmd;
 
         // ---------------- 模拟请求 1-0 ----------------
-        ofCommand(DemoCmd.here).setTitle("here").setRequestData(() -> {
+        ofCommand(Cmd.here).setTitle("here").setRequestData(() -> {
             HelloReq helloReq = new HelloReq();
             helloReq.setName("1");
             return helloReq;
@@ -25,7 +25,7 @@ public class DemoRegion extends AbstractInputCommandRegion {
         });
 
         // ---------------- 模拟请求 1-1 ----------------
-        ofCommand(DemoCmd.jackson).setTitle("jackson").setRequestData(() -> {
+        ofCommand(Cmd.jackson).setTitle("jackson").setRequestData(() -> {
             HelloReq helloReq = new HelloReq();
             helloReq.setName("1");
             return helloReq;
@@ -36,10 +36,17 @@ public class DemoRegion extends AbstractInputCommandRegion {
         });
 
         // ---------------- 模拟请求 1-2 ----------------
-        ofCommand(DemoCmd.list).setTitle("list").callback(result -> {
+        ofCommand(Cmd.list).setTitle("list").callback(result -> {
             // 得到 list 数据，因为服务器返回的是 List
             List<HelloReq> list = result.listValue(HelloReq.class);
             log.info("list : {}", list);
+        });
+
+
+        // ---------------- 模拟请求 1-3 ----------------
+        ofCommand(Cmd.hereFlow).setTitle("hereFlow").callback(result -> {
+            // 得到 list 数据，因为服务器返回的是 List
+            log.info("hereFlow : {}", result);
         });
     }
 

@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum GameCode implements MsgExceptionInfo {
-    /** 名字检查 */
-    nameChecked(100, "异常机制测试，name 必须是 jackson !");
+    nameChecked(100, "异常机制测试，name 必须是 jackson !"),
+    accountOnline(101, "用户在线"),
+    loginErr(102, "登录失败"),
+
     ;
 
     /** 消息码 */
